@@ -10,16 +10,84 @@
 		width: 50px;
 	}
 	section{
-		width: 300px;
+		/* width: 300px; */
 	}
 	#divResult{
-		text-align: center;
+		/* text-align: center; */
 		font-size: 28pt;
 	}
 	#spanTax{
 		text-align: center;
 	}
+	.error{
+		display : none;
+		color : red;
+		font-style: italic;
+	}
 	</style>
+	<script>
+	function validateBasic(){
+		var txtBasic = document.getElementById("txtBasic"),
+			spanBasicError = document.getElementById("spanBasicError");
+		if (txtBasic.value === ""){
+			spanBasicError.style.display = "inline";
+		} else {
+			spanBasicError.style.display = "none";
+		}
+	}
+	function validateHra(){
+		var txtHra = document.getElementById("txtHra"),
+			spanHraError = document.getElementById("spanHraError");
+		if (txtHra.value === ""){
+			spanHraError.style.display = "inline";
+		} else {
+			spanHraError.style.display = "none";
+		}
+	}
+	function validateDa(){
+		var txtDa = document.getElementById("txtDa"),
+			spanDaError = document.getElementById("spanDaError");
+		if (txtDa.value === ""){
+			spanDaError.style.display = "inline";
+		} else {
+			spanDaError.style.display = "none";
+		}
+	}
+	function onBtnCalculateClick(){
+		var basic = parseInt(document.getElementById("txtBasic").value,10),
+			hra = parseInt(document.getElementById('txtHra').value,10),
+			da = parseInt(document.getElementById("txtDa").value,10),
+			tax = document.getElementById('rangeTax').value;
+
+		var gross = basic + hra + da,
+			net = gross * ((100-tax)/100);
+
+		document.getElementById("divResult").innerText = net;
+	}
+	function onRangeTaxChange(){
+		var tax = document.getElementById("rangeTax").value;
+		var spanTax = document.getElementById("spanTax")
+		spanTax.innerText = tax + "%";
+		if (tax > 25){
+			spanTax.style.color = "red";
+		} else {
+			spanTax.style.color = "green";
+		}
+		//onBtnCalculateClick();
+	}
+	function init(){
+		document.getElementById("txtBasic").onblur = validateBasic;
+		document.getElementById("txtHra").onblur = validateHra;
+		document.getElementById("txtDa").onblur = validateDa;
+		document.getElementById("btnCalculate").onclick = onBtnCalculateClick;
+		document.getElementById("rangeTax").onchange = onRangeTaxChange;
+		/*var allInputs = document.getElementsByTagName("input");
+		for(var i=0;i<allInputs.length;i++){
+			allInputs[i].onchange = onBtnCalculateClick;
+		}*/
+	}
+	window.onload = init;
+	</script>
 </head>
 <body>
 	<header>
@@ -27,9 +95,21 @@
 	</header>
 
 	<section>
-		<div><label for="">Basic :</label><input type="text" name="" id="txtBasic"></div>
-		<div><label for="">HRA :</label><input type="text" name="" id="txtHra"></div>
-		<div><label for="">DA :</label><input type="text" name="" id="txtDa"></div>
+		<div>
+			<label for="">Basic :</label>
+			<input type="text" name="" id="txtBasic">
+			<span class="error" id="spanBasicError">Basic is required!!</span>
+		</div>
+		<div>
+			<label for="">HRA :</label>
+			<input type="text" name="" id="txtHra">
+			<span class="error" id="spanHraError">HRA is required!!</span>
+		</div>
+		<div>
+			<label for="">DA :</label>
+			<input type="text" name="" id="txtDa">
+			<span class="error" id="spanDaError">DA is required!!</span>
+		</div>
 		<div>
 			<label for="">Tax :</label>
 			<input type="range" name="" id="rangeTax" min="0" max="50" value="0">
