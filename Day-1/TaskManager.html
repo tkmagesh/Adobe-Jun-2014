@@ -57,17 +57,18 @@
 		margin-right: 2px;
 	}
 	</style>
-</head>
-<body>
+
+</head><body>
 	<header>
 		<h1>Task Manager</h1>
 		<h3>We help you organize your life better!</h3>
 	</header>
 	<section>
 		<span>Task :</span>
-		<input type="text" name="" id="">
+		<input type="text" name="" id="txtTaskName">
 		<input type="button" value="Add Task" id="btnAddTask" class="active">
 		<input type="button" value="Remove Completed" id="btnRemoveCompleted" class="danger">
+
 		<ul>
 			<li><span>Explore jQuery</span></li>
 			<li><span>Master JavaScript</span></li>
@@ -77,5 +78,12 @@
 	<footer>
 		<div class="message">A new task is added..</div>
 	</footer>
+	<script>
+		function displayTask(){
+		  console.log(document.getElementById("txtTaskName").value);
+		}
+		var btnAdd = document.getElementById("btnAddTask")
+		btnAdd.onclick = displayTask;
+	</script>
 </body>
 </html>

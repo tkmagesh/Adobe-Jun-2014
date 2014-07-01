@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Greeting App</title>
+	<script>
+		function greet(){
+			var firstName = document.getElementById("txtFirstName").value;
+			var lastName = document.getElementById("txtLastName").value;
+			var currentHour = new Date().getHours();
+			var greetMsg  = "Hi " + firstName + " " + lastName + ", ";
+			if (currentHour < 12){
+				greetMsg += "Good Morning!"
+			} else {
+				greetMsg += "Good Evening!"
+			}
+			//console.log(greetMsg);
+			document.getElementById("divMessage").innerText = greetMsg;
+		}
+		function init(){
+			document.getElementById("btnGreet").onclick = greet;
+		}
+		window.onload = init;
+	</script>
+</head>
+<body>
+	<div><label for="txtFirstName" accesskey="n">First Name :</label><input type="text" name="" id="txtFirstName"></div>
+	<div><label for="txtLastName" accesskey="l">Last Name :</label><input type="text" name="" id="txtLastName"></div>
+	<div>
+		<input type="button" value="Greet" id="btnGreet"  >
+		<div id="divMessage"></div>
+	</div>
+
+</body>
+</html>
