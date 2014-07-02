@@ -1,0 +1,62 @@
+	* {
+		margin : 0px;
+	}
+	header{
+		border-top : 2px solid blue;
+		border-bottom : 2px solid blue;
+		padding: 10px;
+		background-color: lightblue;
+	}
+	header h3{
+		font-style: italic;
+		font-weight: normal;
+		font-size: 12pt;
+	}
+	section{
+		margin: 10px;
+	}
+	#btnAddTask{
+		border : 1px solid blue;
+		background-color: lightblue;
+
+	}
+	#btnRemoveCompleted{
+		border : 1px solid red;
+		background-color: lightpink;
+	}
+	ul{
+		margin-top: 10px;
+		width: 300px;
+		padding-left: 0px;
+	}
+	li.taskItem{
+		list-style: none;
+		margin: 5px;
+		padding: 7px;
+		border : 1px solid gray;
+		background-color: #e7e7e7;
+	}
+	footer{
+		position : absolute;
+		bottom: 0px;
+		width: 100%;
+	}
+	.message{
+		float: right;
+		border : 1px solid gray;
+		padding: 10px;
+		background-color: #eee;
+		border-radius: 8px;
+		margin-bottom: 2px;
+		margin-right: 2px;
+	}
+	#divErrorMessage{
+		color : red;
+		font-style: italic;
+
+	}
+	.completed{
+		color : red;
+		text-decoration: line-through;
+		font-style: italic;
+	}

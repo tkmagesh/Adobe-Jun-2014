@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Task Manager</title>
+	<link rel="stylesheet" href="TaskManager.css">
+	<script src="taskCollection.js"></script>
+	<script src="TaskManager.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Task Manager</h1>
+		<h3>We help you organize your life better!</h3>
+	</header>
+	<section>
+		<span>Task :</span>
+		<input type="text" name="" id="txtTaskName" maxlength="20">
+		<input type="button" value="Add Task" id="btnAddTask" class="active">
+		<input type="button" value="Remove Completed" id="btnRemoveCompleted" class="danger">
+		<div id="divErrorMessage"></div>
+		<ul id="ulTaskList">
+			
+		</ul>
+	</section>
+	<footer>
+		<div class="message">A new task is added..</div>
+	</footer>
+</body>
+</html>
