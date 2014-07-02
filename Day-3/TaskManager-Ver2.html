@@ -80,9 +80,7 @@
 		<input type="button" value="Remove Completed" id="btnRemoveCompleted" class="danger">
 		<div id="divErrorMessage"></div>
 		<ul id="ulTaskList">
-			<li class="taskItem">Explore jQuery</li>
-			<li class="taskItem completed">Master JavaScript</li>
-			<li class="taskItem">Learn Backbone</li>
+			
 		</ul>
 	</section>
 	<footer>
@@ -90,6 +88,8 @@
 	</footer>
 	<script>
 	(function(){
+		window.tasks = [];
+
 		window.addEventListener("DOMContentLoaded",init);
 		function init(){
 			document.getElementById("txtTaskName").addEventListener("blur",onValidateTaskName);
@@ -103,8 +103,12 @@
 		function onBtnRemoveCompletedClick(){
 			var taskNodes = document.getElementById("ulTaskList").children;
 			for(var i=taskNodes.length-1;i>=0;i--){
-				if (taskNodes[i].classList.contains("completed"))
+				if (taskNodes[i].classList.contains("completed")){
+					for(var j=tasks.length-1;j>=0;j--)
+						if (tasks[j].id === taskNodes[i].getAttribute('task-id'))
+							tasks.splice(j,1);
 					taskNodes[i].remove();
+				}
 			}
 		}
 		function onTaskItemClick(){
@@ -114,6 +118,12 @@
 				this.classList.add("completed");
 			}*/
 			this.classList.toggle("completed");
+			var taskId = this.getAttribute("task-id");
+			for(var i=0;i<tasks.length;i++){
+				if (tasks[i].id === taskId)
+					tasks[i].toggleCompletion();
+			}
+
 		}
 		function onValidateTaskName(){
 
@@ -129,11 +139,21 @@
 		function onBtnAddTaskClick(){
 			var taskName = document.getElementById("txtTaskName").value;
 
-			/*var newTaskItem = "<li class='taskItem'>" + taskName + "</li>";
-			document.getElementById("ulTaskList").innerHTML += newTaskItem;
-*/
+			/*Create a task Object and add it to the collection*/
+			var task = {
+				id : new Date().getTime().toString(),
+				name : taskName, 
+				isCompleted : false,
+				toggleCompletion : function(){
+					this.isCompleted = !this.isCompleted;
+				}
+			};
+			tasks.push(task);
+			/*Show the newly created task in the UI*/
+			
+
 			var newTaskItem = document.createElement("li");
-			console.dir(newTaskItem);
+			newTaskItem.setAttribute("task-id",task.id);
 			newTaskItem.innerText = taskName;
 			newTaskItem.classList.add("taskItem");
 			newTaskItem.addEventListener("click",onTaskItemClick);
