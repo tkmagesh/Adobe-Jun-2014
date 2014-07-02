@@ -26,33 +26,16 @@
 	}
 	</style>
 	<script>
-	function validateBasic(){
-		var txtBasic = document.getElementById("txtBasic"),
-			spanBasicError = document.getElementById("spanBasicError");
-		if (txtBasic.value === ""){
-			spanBasicError.style.display = "inline";
+	function validateSalaryComponent(){
+		var txtBox = this,
+			spanError = this.nextElementSibling;
+		if (txtBox.value === ""){
+			spanError.style.display = "inline";
 		} else {
-			spanBasicError.style.display = "none";
-		}
+			spanError.style.display = "none";
+		}	
 	}
-	function validateHra(){
-		var txtHra = document.getElementById("txtHra"),
-			spanHraError = document.getElementById("spanHraError");
-		if (txtHra.value === ""){
-			spanHraError.style.display = "inline";
-		} else {
-			spanHraError.style.display = "none";
-		}
-	}
-	function validateDa(){
-		var txtDa = document.getElementById("txtDa"),
-			spanDaError = document.getElementById("spanDaError");
-		if (txtDa.value === ""){
-			spanDaError.style.display = "inline";
-		} else {
-			spanDaError.style.display = "none";
-		}
-	}
+	
 	function onBtnCalculateClick(){
 		var basic = parseInt(document.getElementById("txtBasic").value,10),
 			hra = parseInt(document.getElementById('txtHra').value,10),
@@ -76,17 +59,17 @@
 		//onBtnCalculateClick();
 	}
 	function init(){
-		document.getElementById("txtBasic").onblur = validateBasic;
-		document.getElementById("txtHra").onblur = validateHra;
-		document.getElementById("txtDa").onblur = validateDa;
-		document.getElementById("btnCalculate").onclick = onBtnCalculateClick;
-		document.getElementById("rangeTax").onchange = onRangeTaxChange;
+		document.getElementById("txtBasic").addEventListener('blur',validateSalaryComponent);
+		document.getElementById("txtHra").addEventListener('blur',validateSalaryComponent);
+		document.getElementById("txtDa").addEventListener('blur',validateSalaryComponent);
+		document.getElementById("btnCalculate").addEventListener('click',onBtnCalculateClick);
+		document.getElementById("rangeTax").addEventListener('change',onRangeTaxChange);
 		/*var allInputs = document.getElementsByTagName("input");
 		for(var i=0;i<allInputs.length;i++){
 			allInputs[i].onchange = onBtnCalculateClick;
 		}*/
 	}
-	window.onload = init;
+	window.addEventListener("DOMContentLoaded",init);
 	</script>
 </head>
 <body>
