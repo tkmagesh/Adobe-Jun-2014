@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+	.hint{
+		color : gray;
+		font-style: italic;
+	}
+	</style>
+	<script src="jquery-2.1.1.js"></script>
+	<script>
+	$(function(){
+
+		$("input:text[hintText]").each(function(){
+			var $currentTextBox = $(this);
+
+			var $hintNode = $("<div>")
+				.html($(this).attr('hintText'))
+				.addClass('hint')
+				.css({
+					position : "absolute",
+					zIndex : 0,
+					top : $currentTextBox.position().top + 4,
+					left : $currentTextBox.position().left, 
+				})
+				.click(function(){
+					$currentTextBox.focus();
+				})
+				.appendTo(document.body);
+
+			$(this).keyup(function(){
+				if ($(this).val() !== ''){
+					$hintNode.hide();
+				} else {
+					$hintNode.show();
+				}
+			});/*.blur(function(){
+				if ($(this).val() === ''){
+					
+				}
+			});*/ 
+		});
+
+		var hintText = "Enter your name..";
+		$("#txtName")
+			.focus(function(){
+				if (this.value === hintText){
+					$(this).removeClass('hint').val('');
+				}
+			})
+			.blur(function(){
+				if (this.value === ''){
+					$(this).addClass('hint').val(hintText);
+				}
+			}).trigger('blur');
+	})
+	</script>
+</head>
+<body>
+	<input type="text" name="" id="txtName">
+	<input type="text" name="" id="txtAge" hintText="Enter the age..">
+	
+</body>
+</html>
