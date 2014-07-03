@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Greeting App</title>
+	<style>
+	.highlight {
+			border : 1px solid red
+		}
+	</style>
+	<script src="jquery-2.1.1.js"></script>
+	<script>
+	function highlight(jQObj){
+		jQObj.addClass("highlight");
+	}
+	function clear(){
+		jQuery("*").removeClass("highlight");
+	}
+	</script>
+	
+	<script>
+		/*
+			1. Locate DOM Nodes
+			2. Traverse through the DOM hierarchy
+			3. Manipulate the attributes of the DOM Nodes
+			4. Manipulate styles
+			5. Handle events
+			6. Create / Destroy DOM Nodes
+			7. Animations
+			8. AJAX
+
+		*/
+		function greet(){
+			var firstName = $("#txtFirstName").val();
+			var lastName = $("#txtLastName").val();
+			var currentHour = new Date().getHours();
+			var greetMsg  = "Hi " + firstName + " " + lastName + ", ";
+			if (currentHour < 12){
+				greetMsg += "Good Morning!"
+			} else {
+				greetMsg += "Good Evening!"
+			}
+			//console.log(greetMsg);
+			$("#divMessage").text(greetMsg);
+		}
+		function init(){
+			$("#btnGreet").click(greet);
+		}
+		//$(document).ready(init);
+		$(init);
+		
+	</script>
+</head>
+<body>
+	<div>
+		<label for="txtFirstName" accesskey="n" >First Name :</label>
+		<input type="text" name="" id="txtFirstName" class="nameBox">
+	</div>
+	<div>
+		<label for="txtLastName" accesskey="l" >Last Name :</label>
+		<input type="text" name="" id="txtLastName" class="nameBox">
+	</div>
+	<div>
+		<label for="txtAge" accesskey="l" >Age :</label>
+		<input type="text" name="" id="txtAge" class="numberBox">
+	</div>
+	<div>
+		<input type="button" value="Greet" id="btnGreet"  >
+		<input type="reset" value="Reset" id="btnReset"  >
+	</div>
+	<div id="divMessage"></div>
+
+</body>
+</html>
