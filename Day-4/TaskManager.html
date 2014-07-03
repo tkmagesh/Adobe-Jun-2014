@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Task Manager</title>
+	<style>
+	* {
+		margin : 0px;
+	}
+	header{
+		border-top : 2px solid blue;
+		border-bottom : 2px solid blue;
+		padding: 10px;
+		background-color: lightblue;
+	}
+	header h3{
+		font-style: italic;
+		font-weight: normal;
+		font-size: 12pt;
+	}
+	section{
+		margin: 10px;
+	}
+	#btnAddTask{
+		border : 1px solid blue;
+		background-color: lightblue;
+
+	}
+	#btnRemoveCompleted{
+		border : 1px solid red;
+		background-color: lightpink;
+	}
+	ul{
+		margin-top: 10px;
+		width: 300px;
+		padding-left: 0px;
+	}
+	li.taskItem{
+		list-style: none;
+		margin: 5px;
+		padding: 7px;
+		border : 1px solid gray;
+		background-color: #e7e7e7;
+	}
+	footer{
+		position : absolute;
+		bottom: 0px;
+		width: 100%;
+	}
+	div.messages{
+		float: right;
+		margin-bottom: 2px;
+		margin-right: 2px;
+	}
+	.message{
+		border : 1px solid gray;
+		padding: 10px;
+		background-color: #eee;
+		border-radius: 8px;
+
+	}
+	#divErrorMessage{
+		color : red;
+		font-style: italic;
+
+	}
+	.completed{
+		color : red;
+		text-decoration: line-through;
+		font-style: italic;
+	}
+	</style>
+
+</head><body>
+	<header>
+		<h1>Task Manager</h1>
+		<h3>We help you organize your life better!</h3>
+	</header>
+	<section>
+		<span>Task :</span>
+		<input type="text" name="" id="txtTaskName" maxlength="20">
+		<input type="button" value="Add Task" id="btnAddTask" class="active">
+		<input type="button" value="Remove Completed" id="btnRemoveCompleted" class="danger">
+		<div id="divErrorMessage"></div>
+		<ul id="ulTaskList">
+			
+		</ul>
+	</section>
+	<footer>
+		<div class="messages"></div>
+	</footer>
+	<script src="jquery-2.1.1.js"></script>
+	<script>
+	(function(){
+		$(function (){
+			$("#txtTaskName").blur(onValidateTaskName);
+			$("#btnAddTask").click(onBtnAddTaskClick);
+			$("#btnRemoveCompleted").click(onBtnRemoveCompletedClick);
+			$("#ulTaskList").on("click","li", onTaskItemClick);
+			//$("#ulTaskList").delegate("li", "click", onTaskItemClick);
+		});
+
+		function onBtnRemoveCompletedClick(){
+			$("#ulTaskList > li.completed").slideUp('slow', function(){
+				$(this).remove();
+			});
+			displayMessage("Zero or more completed tasks are removed...");
+		}
+		function onTaskItemClick(){
+			$(this).toggleClass("completed");
+		}
+		function onValidateTaskName(){
+			var msg = this.value === "" ? "A task name is mandatory!!" : "";
+			$("#divErrorMessage").html(msg);
+		}
+		function onBtnAddTaskClick(){
+			$("<li></li>")
+				.text($("#txtTaskName").val())
+				.addClass("taskItem")
+				.hide()
+				.appendTo("#ulTaskList")
+				.slideDown();
+			displayMessage("A new task is added..");
+		}
+		function displayMessage(msg){
+			$("<div class='message'></div>")
+				.hide()
+				.html(msg)
+				.appendTo("div.messages")
+				.slideDown('fast')
+				.delay(3000)
+				.fadeOut('fast', function(){
+					$(this).remove();
+				});
+		}
+	})();
+	</script>
+</body>
+</html>
