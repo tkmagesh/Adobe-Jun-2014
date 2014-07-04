@@ -8,15 +8,30 @@
 	$(function(){
 		$("#btnShowRemoveHTML").click(function(){
 			//remoteContentPlaceholder
+			/*
 			$.get("partialContent.html",function(response){
 				$("#remoteContentPlaceholder").append(response);
 			},"html");
+			*/
+			$("#remoteContentPlaceholder").load("partialContent.html");
 		});
+		$("#btnShowProducts").click(function(){
+			/*
+			$.get("products.json",function(response){
+				console.table(response);
+			},"json");
+			*/
+			$.getJSON("products.json",function(response){
+				console.table(response);
+			})
+		})
 	});
 	</script>
 </head>
 <body>
 	<div><input type="button" value="Show Remote Html" id="btnShowRemoveHTML"></div>
 	<div id="remoteContentPlaceholder"></div>
+	<div><input type="button" value="Show Products" id="btnShowProducts"></div>
+	<div id="productList"></div>
 </body>
 </html>
