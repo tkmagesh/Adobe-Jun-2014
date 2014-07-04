@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax Demos</title>
+	<script src="jquery-2.1.1.js"></script>
+	<script>
+	$(function(){
+		$("#btnShowRemoveHTML").click(function(){
+			//remoteContentPlaceholder
+			$.get("partialContent.html",function(response){
+				$("#remoteContentPlaceholder").append(response);
+			},"html");
+		});
+	});
+	</script>
+</head>
+<body>
+	<div><input type="button" value="Show Remote Html" id="btnShowRemoveHTML"></div>
+	<div id="remoteContentPlaceholder"></div>
+</body>
+</html>
