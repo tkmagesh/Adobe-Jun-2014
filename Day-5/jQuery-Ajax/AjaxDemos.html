@@ -22,7 +22,13 @@
 			},"json");
 			*/
 			$.getJSON("products.json",function(response){
-				console.table(response);
+				var productTable = "<table><tr><th>Id</th><th>Name</th><th>Cost</th><th>Units</th></tr>";
+				for(var i=0;i<response.length;i++){
+					var p = response[i];
+					productTable += "<tr><td>" + p.id + "</td><td>" + p.name + "</td><td>" + p.cost + "</td><td>" + p.units +"</td></tr>" 
+				}
+				productTable += "</table>";
+				$("#productList").html(productTable);
 			})
 		})
 	});
